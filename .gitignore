@@ -1,0 +1,46 @@
+*
+
+!*.*
+
+!*/
+
+# macOS 관련 파일
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS에서 C++ 빌드 시 생성되는 디버그 심볼 폴더
+*.dSYM/
+*.dSYM/*
+
+# macOS에서 실행 가능한 유닉스 파일 (바이너리 파일)
+*.out
+*.o
+*.a
+*.so
+*.exe
+
+# C++ 빌드 파일 및 결과물
+*.obj
+*.elf
+
+# VSCode 설정 파일
+.vscode/
+.vscode/*
+
+# CMake 빌드 파일
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# 로그 파일
+*.log
+
+# 바이너리 파일
+bin/
+build/
+
+# 기타 임시 파일들
+*.swp
+*~
