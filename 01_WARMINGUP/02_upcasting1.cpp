@@ -21,6 +21,3 @@ int main()
     Shape& r = rect;   // ok. 
     
 }
-
-
-
