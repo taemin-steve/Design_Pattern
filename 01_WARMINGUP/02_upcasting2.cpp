@@ -16,7 +16,7 @@ int main()
     Shape* p = &rect; 
     
     p->color = 0; // ok
-    p->x = 0;     // error
+    //p->x = 0;     // error
     static_cast<Rect*>(p)->x = 0; // ok
     
 }

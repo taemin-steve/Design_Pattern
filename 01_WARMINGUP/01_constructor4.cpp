@@ -15,7 +15,7 @@ public:
 int main()
 {
 	// 다음중 에러를 모두 골라 보세요
-	Animal a;	// A error protected 생성자를 직접 호출 하는 case
+	//Animal a;	// A error protected 생성자를 직접 호출 하는 case
 	Dog    d;	// B ok
 }
 
