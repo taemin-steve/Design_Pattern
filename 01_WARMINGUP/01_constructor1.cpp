@@ -31,3 +31,5 @@ int main()
 	Derived d2(5);	// call Derived::Derived(int)
 
 }
+
+// 부모 클래스의 생성자가 먼저 호출된다.
