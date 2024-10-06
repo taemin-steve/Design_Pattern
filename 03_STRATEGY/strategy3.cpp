@@ -15,9 +15,9 @@ public:
 		{
 			char c = _getch();
 
-			if (c == 13) break; // enter 키
+			if (c == 13 && iscomplete(data) ) break;
 
-			if (isdigit(c))
+			if (validate(data, c))
 			{
 				data.push_back(c);
 				std::cout << c;
@@ -26,15 +26,15 @@ public:
 		std::cout << "\n";
 		return data;
 	}
+	virtual bool validate(const std::string& data, char c)
+	{
+		return true;
+	}
+	virtual bool iscomplete(const std::string& data)
+	{
+		return true;
+	}
 };
-
-
-
-
-
-
-
-
 
 
 
@@ -47,3 +47,6 @@ int main()
 		std::cout << s << std::endl;
 	}
 }
+
+//탬플릿 패턴을 사용할 수 있음. 
+// 

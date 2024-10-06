@@ -41,7 +41,7 @@ class NumEdit : public Edit
 {	
 	int count;
 public:
-	NumEdit(int count = 9999) : count(count) {}
+	NumEdit(int count = 9999) : count(count) {} //맴버변수를 초기화 하는 방법
 
 	bool validate(const std::string& data, char c) override
 	{		

@@ -15,9 +15,9 @@ public:
 		{
 			char c = _getch();
 
-			if (c == 13 && iscomplete(data) ) break;
+			if (c == 13) break; // enter 키
 
-			if (validate(data, c))
+			if (isdigit(c)) // 이런 validation, 제한 정책은 기존의 코드 수정없이 가능해야한다.
 			{
 				data.push_back(c);
 				std::cout << c;
@@ -26,15 +26,15 @@ public:
 		std::cout << "\n";
 		return data;
 	}
-	virtual bool validate(const std::string& data, char c)
-	{
-		return true;
-	}
-	virtual bool iscomplete(const std::string& data)
-	{
-		return true;
-	}
 };
+
+
+
+
+
+
+
+
 
 
 

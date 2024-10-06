@@ -9,6 +9,24 @@ struct IValidator
 	virtual ~IValidator() {}
 };
 
+class DigitValidator : public IValidator
+{
+	int count;
+public:
+	DigitValidator(int count = 9999) : count(count) {}
+
+	bool validate(const std::string& data, char c) override 
+	{
+		return data.size() < count && isdigit(c);
+	}
+	bool iscomplete(const std::string& data) override 
+	{
+		return count != 9999 && data.size() == count;
+	}
+};
+
+
+
 
 
 class Edit
@@ -44,9 +62,17 @@ public:
 int main()
 {
 	Edit edit;
+	DigitValidator v(5);
+	edit.set_validator(&v);
+	
+//	DigitValidator v2(15);
+//	edit.set_validator(&v2);
+
 	while (1)
 	{
 		std::string s = edit.get_text();
 		std::cout << s << std::endl;
 	}
 }
+
+//위임하는 개념이다.
