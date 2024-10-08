@@ -25,3 +25,6 @@ int main()
 	vector<int, malloc_allocator<int> > v;
 
 }
+
+//policy base design 
+//객체 말고 탬플릿으로 전달해보자. >> 인라인 치환도 가능하다. // 실행시간에 교체할 수는 없음. 
