@@ -4,6 +4,8 @@
 #include <conio.h>
 
 
+class no_implementation{};
+
 class BaseMenu
 {
 	std::string title;
@@ -17,6 +19,9 @@ public:
 	void set_title(const std::string& s) { title = s; }
 
 	virtual void command() = 0;
+
+	virtual BaseMenu* submenu(int idx) { throw no_implementation();} // MenuItem에서는 재정의 하지 않음. >> 필요없는, 혹은 접근해서는 안되는 케이스로 들어오면 예외를 던지게 함.
+	virtual void add_menu(BaseMenu* m) { throw no_implementation(); }
 };
 
 
@@ -70,26 +75,24 @@ public:
 				continue;
 			v[cmd - 1]->command();		
 		}
+    }
 
+	BaseMenu* submenu(int idx)
+	{
+		return v[idx];
 	}
 };
 
 int main()
 {
-	MenuItem m1("참치 김밥",   11);
-	MenuItem m2("소고기 김밥", 12);
-	MenuItem m3("돈까스 김밥", 13);
+	PopupMenu* root = new PopupMenu("ROOT");
+	root->add_menu( new PopupMenu("색상 변경"));
+	root->add_menu( new MenuItem("저장", 11));
 
-	MenuItem m4("라면",   21);
-	
-	PopupMenu kimbab("김밥류");
-	kimbab.add_menu(&m1);
-	kimbab.add_menu(&m2);
-	kimbab.add_menu(&m3);
+//	root->submenu(0);
+	root->submenu(0)->add_menu( new MenuItem("HD", 21));
 
-	PopupMenu pm("오늘의 메뉴");
-	pm.add_menu(&kimbab); 
-	pm.add_menu(&m4);
 
-	pm.command(); 
+	root->command();
 }
+
