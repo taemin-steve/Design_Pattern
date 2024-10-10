@@ -1,16 +1,7 @@
 #include <iostream>
 #include <string>
 
-
-struct IDraw
-{
-	virtual void draw() const  = 0;
-
-	virtual ~IDraw() {}
-};
-
-
-class Image : public IDraw
+class Image
 {
 	std::string image_path;
 public:
@@ -19,49 +10,45 @@ public:
 	void draw() const { std::cout << "draw " << image_path << std::endl; }
 };
 
-class Decorator : public IDraw
+class Frame 
 {
-	IDraw* img;
+	Image* img;
 public:
-	Decorator(IDraw* img) : img(img) {}
-
-	void draw() const { img->draw();}
-};
-
-class Frame : public Decorator
-{
-
-public:
-	Frame(IDraw* img) : Decorator(img) {}
+	Frame(Image* img) : img(img) {}
 
 	void draw() const 
 	{ 
 		std::cout << "==========================" << std::endl; 
-		Decorator::draw();
+		img->draw();
 		std::cout << "==========================" << std::endl; 
 	}
 };
 
-class Balloon  : public Decorator
+class Balloon 
 {
-	
+	Image* img;
 public:
-	Balloon(IDraw* img) : Decorator(img) {}
+	Balloon(Image* img) : img(img) {}
 
 	void draw() const 
 	{ 
 		std::cout << "== Balloon ===============" << std::endl; 
-		Decorator::draw();
+		img->draw();
 		std::cout << "== Balloon ==============="  << std::endl; 
 	}
 };
-
 int main()
 {
 	Image img("www.image.com/car.jpg");
+	img.draw();
 
 	Frame frame(&img);
+	frame.draw();
 
-	Balloon balloon(&frame); // ?
+	Balloon balloon(&img);
+//	Balloon balloon(&frame); // ?
 	balloon.draw();
 }
+
+//객체에 기능을 추가하고 싶으면 상속이 아닌 포함을 활용 >> 포인트 맴버 변수를 초기화시에 받는 구조로 형성 
+//왜 이렇게 하지? 그냥 Image에 넣으면 되잖아. >> 기능 중첩이 포인트. 이렇게 하면 기능 중첩이 안됨
