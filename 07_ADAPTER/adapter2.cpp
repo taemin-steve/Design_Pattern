@@ -4,7 +4,7 @@
 #include "Shape.h"
 #include "CoolText.h"
 
-class ClsAdapter : public CoolText, public Shape 
+class ClsAdapter : public CoolText, public Shape //클래스 어댑터 >> CoolText 객체를 하나 새로 생성하는 것과 동일
 {
 public:
 	ClsAdapter(const std::string& text) : CoolText(text) {}
@@ -12,9 +12,9 @@ public:
 	void draw() override { CoolText::show();}
 };	
 
-class ObjAdapter : public Shape 
+class ObjAdapter : public Shape  // 객체 어댑터
 {
-	CoolText* ct;
+	CoolText* ct; // 객체를 받아올 떄는 보통 이런 형식을 많이 사용한다.
 public:
 	ObjAdapter(CoolText* ct) : ct(ct) {}
 
@@ -30,7 +30,7 @@ int main()
 
 //	v.push_back( &ct ); 	// error
 
-	v.push_back( new ObjAdapter( &ct)  );
+	v.push_back( new ObjAdapter( &ct)  ); // 이미 위에서 만든 CoolText의 객체를 가져와서 사용
 
 	v[0]->draw();
 }

@@ -19,6 +19,6 @@ int main()
 	stack<int, std::vector<int>> s1;
 	stack<int, std::list<int>> s2;
 	stack<int> s;
-	s.push(10);
-	s.push(20);
+	s.push(10); // 인라인화가 이루어진다면 s.c.push_back(a) 가 되어 마치 stack은 없는 것처럼 작동하게 된다.
+	s.push(20); // 기계어 코드에는 stack과 관련된 코드들은 없는 것 처럼 받아들여진다.
 }

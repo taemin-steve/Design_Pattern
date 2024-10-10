@@ -3,7 +3,7 @@
 #include <list>
 #include <iostream>
 
-template<typename T> 
+template<typename T> // private 상속을 한다면 재정의할 기회가 있음!!!! 이렇게 하면 깔끔하지만, 재정의는 불가능.
 class stack 
 {
 	std::list<T> c;

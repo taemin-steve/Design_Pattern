@@ -19,6 +19,7 @@ public:
 	{ 
 		return std::list<T>::back(); 
 	}
+	//가능하지만, 필요없는 push_front같은 함수들도 보인다! //stack에서는 없는 기능
 };
 
 int main()
@@ -29,3 +30,5 @@ int main()
 
 //	s.push_front(100); // ??
 }
+
+//기존 sequence container에 이름만 살짝 변경해서  stack처럼 보이게 하자!
