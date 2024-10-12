@@ -9,7 +9,7 @@ struct IChart
 
 class Table
 {
-	std::vector<IChart*> v;
+	std::vector<IChart*> v; // 차트를 저장하는 백터
 	int data;
 public:
 	void attach(IChart* p) { v.push_back(p); }
