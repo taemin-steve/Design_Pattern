@@ -17,7 +17,7 @@ public:
 
 class MP3
 {
-	IMP3* impl; 
+	IMP3* impl; //P - IMPL point to implementation으로 불리기도 함 .
 public:
 	MP3(IMP3* p = nullptr) : impl(p)
 	{
