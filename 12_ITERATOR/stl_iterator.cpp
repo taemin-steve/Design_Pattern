@@ -45,7 +45,7 @@ public:
 
 	inline slist_iterator<T> begin()
 	{
-		return slist_iterator<T>(head);
+		return slist_iterator<T>(head); // 임시 객체
 	}
 	inline  slist_iterator<T> end()
 	{

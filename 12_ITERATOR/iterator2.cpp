@@ -64,7 +64,9 @@ public:
 
 	IEnumerator<T>* getEnumerator() override
 	{
-		return new slist_enumerator<T>(head);
+		return new slist_enumerator<T>(head); // 반드시 new를 해줘야함. 
+		// 다 쓰면 반드시 삭제해 주어야 하는데, 라이브러리가 할당하고, 사용자가 삭제하는 코드는 좋지 않음.
+		// GC가 없어서 자동으로 삭제가 안되고, 이는 상당히 부담스러움. 
 	}
 };
 
@@ -83,3 +85,9 @@ int main()
 	p->moveNext();
 	std::cout << p->getObject() << std::endl; // 40
 }
+
+// moveNext(), getObject() 둘다 가상함수. 
+
+// 모든 컨테이너가 동일하게 동작하지 않는다.
+
+// 인터페이스를 상송해서 만드는 경우 위와 같은 다양한 단점이 존재.
