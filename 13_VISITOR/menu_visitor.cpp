@@ -62,7 +62,6 @@ public:
 
 	PopupMenu(const std::string& title) : BaseMenu(title) {}
 
-
 	void accept(IMenuVisitor* visitor)
 	{
 		visitor->visit(this);
@@ -71,7 +70,6 @@ public:
 			//visitor->visit(child);
 			child->accept(visitor); // 
 	}
-
 
 	void add_menu(BaseMenu* p) { v.push_back(p); }
 
