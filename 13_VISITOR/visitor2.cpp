@@ -39,7 +39,7 @@ public:
 
 	void accept(IVisitor<T>* visitor) override
 	{
-		for( auto& e : *this)
+		for( auto& e : *this) // 내 모든 요소를 방문시킴
 			visitor->visit(e);
 	}
 };
