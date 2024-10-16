@@ -1,10 +1,10 @@
 #include <mutex>
 
-template<typename T>
+template<typename T> //CRTP라는 방법 
 class Singleton
 {
 protected:
-	Singleton() {}
+	Singleton() {} // 싱속 받아서 사용할 수 있도록 변경해 주었음
 
 private:	
 	Singleton(const Singleton& ) = delete;
@@ -23,11 +23,11 @@ public:
 		return *instance;
 	}
 };
-template<typename T> T* Singleton<T>::instance = nullptr;
+template<typename T> T* Singleton<T>::instance = nullptr; //추가적으로 해주어야함
 template<typename T> std::mutex Singleton<T>::m;
 
 
-class Mouse : public Singleton< Mouse >
+class Mouse : public Singleton< Mouse > // 상속을 통해서 싱글톤 코드를 재사용하는 방법도 가능
 {
 
 };
