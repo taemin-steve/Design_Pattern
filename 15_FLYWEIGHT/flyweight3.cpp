@@ -11,15 +11,19 @@ class Image
 		std::cout << url << " Downloading...\n";
 	}
 public:
-
 	void draw() 
 	{ 
 		std::cout << "draw " << image_url << '\n';
 	}
-	
-	static std::map<std::string, Image*> image_map;
+	friend class ImageFactory; // 친구는 private에 접근할 수 있음
+	//cpp에는 가능하지만 다른곳에서는 안되는 코드임. 
+};
 
-	static Image* create(const std::string& url)
+class ImageFactory
+{
+	std::map<std::string, Image*> image_map;
+public:
+	Image* create(const std::string& url)
 	{
 		Image* img;
 		auto ret = image_map.find(url);
@@ -32,14 +36,15 @@ public:
 		return image_map[url];
 	}
 };
-std::map<std::string, Image*> Image::image_map;
 
 int main()
 {
-	Image* img1 = Image::create("www.image.com/a.png");
+	ImageFactory factory;
+
+	Image* img1 = factory.create("www.image.com/a.png");
 	img1->draw();
 
-	Image* img2 = Image::create("www.image.com/a.png");
+	Image* img2 = factory.create("www.image.com/a.png");
 	img2->draw();
 }
 

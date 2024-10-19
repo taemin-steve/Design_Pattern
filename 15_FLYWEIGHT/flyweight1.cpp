@@ -21,7 +21,7 @@ int main()
 	Image* img1 = new Image("www.image.com/a.png");
 	img1->draw();
 
-	Image* img2 = new Image("www.image.com/a.png");
+	Image* img2 = new Image("www.image.com/a.png"); // 동일 이미지를 두번이나 받는다!
 	img2->draw();
 }
 
