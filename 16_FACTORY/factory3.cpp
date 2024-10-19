@@ -46,22 +46,23 @@ public:
 	}
 };
 
+//RegisterFactory rf(1, &Rect::create);
 
-#define REGISTER(classname)						\
-	static Shape* create() { return new classname; }	\
-	static RegisterFactory rf;
 
-#define REGISTER_IMPL(type, classname)			\
-	RegisterFactory classname::rf(type, &classname::create);
+
 
 class Rect : public Shape
 {
 public:
 	void draw() override { std::cout << "draw Rect" << std::endl; }
 
-	REGISTER(Rect)
+	static Shape* create() { return new Rect; }
+
+
+	static RegisterFactory rf; // static 생성자는 클래스에 대해서 한번만 불린다.
+	// c#에는 원래 static 생성자가 있음
 };
-REGISTER_IMPL(1, Rect)
+RegisterFactory Rect::rf(1, &Rect::create);
 
 
 
@@ -73,19 +74,12 @@ class Circle : public Shape
 public:
 	void draw() override { std::cout << "draw Circle" << std::endl; }
 
-	REGISTER(Circle)
+	static Shape* create() { return new Circle; }
+
+	static RegisterFactory rf;
 };
-REGISTER_IMPL(2, Circle)
+RegisterFactory Circle::rf(2, &Circle::create);
 
-
-class Triangle : public Shape
-{
-public:
-	void draw() override { std::cout << "draw Triangle" << std::endl; }
-
-	REGISTER(Triangle)
-};
-REGISTER_IMPL(3, Triangle)
 
 
 
@@ -94,6 +88,10 @@ int main()
 	std::vector<Shape*> v;
 
 	ShapeFactory& factory = ShapeFactory::get_instance();
+
+	// 공장에 제품을 등록한다.
+	// factory.register_shape(1, &Rect::create);
+	// factory.register_shape(2, &Circle::create);
 
 	while (1)
 	{
@@ -107,6 +105,8 @@ int main()
 			if ( s )
 				v.push_back(s);
 		}
+
+
 		else if (cmd == 9)
 		{
 			for (auto s : v)

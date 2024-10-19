@@ -46,22 +46,22 @@ public:
 	}
 };
 
-//RegisterFactory rf(1, &Rect::create);
 
+#define REGISTER(classname)						\
+	static Shape* create() { return new classname; }	\
+	static RegisterFactory rf;
 
-
+#define REGISTER_IMPL(type, classname)			\
+	RegisterFactory classname::rf(type, &classname::create);
 
 class Rect : public Shape
 {
 public:
 	void draw() override { std::cout << "draw Rect" << std::endl; }
 
-	static Shape* create() { return new Rect; }
-
-
-	static RegisterFactory rf;
+	REGISTER(Rect)
 };
-RegisterFactory Rect::rf(1, &Rect::create);
+REGISTER_IMPL(1, Rect)
 
 
 
@@ -73,12 +73,21 @@ class Circle : public Shape
 public:
 	void draw() override { std::cout << "draw Circle" << std::endl; }
 
-	static Shape* create() { return new Circle; }
-
-	static RegisterFactory rf;
+	REGISTER(Circle)
 };
-RegisterFactory Circle::rf(2, &Circle::create);
+REGISTER_IMPL(2, Circle)
 
+
+class Triangle : public Shape
+{
+public:
+	void draw() override { std::cout << "draw Triangle" << std::endl; }
+
+	//REGISTER(Triangle)
+	static Shape* create() { return new Triangle; }	
+	static RegisterFactory rf1; // rf1으로 하더라도 어차피 factory는 싱글턴이기 떄문에 문제는 없음. 비효율적일 뿐
+};
+RegisterFactory Triangle::rf1(3, &Triangle::create);
 
 
 
@@ -87,10 +96,6 @@ int main()
 	std::vector<Shape*> v;
 
 	ShapeFactory& factory = ShapeFactory::get_instance();
-
-	// 공장에 제품을 등록한다.
-	// factory.register_shape(1, &Rect::create);
-	// factory.register_shape(2, &Circle::create);
 
 	while (1)
 	{
@@ -104,8 +109,6 @@ int main()
 			if ( s )
 				v.push_back(s);
 		}
-
-
 		else if (cmd == 9)
 		{
 			for (auto s : v)

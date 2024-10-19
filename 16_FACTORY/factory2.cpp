@@ -15,9 +15,9 @@ class Rect : public Shape
 public:
 	void draw() override { std::cout << "draw Rect" << std::endl; }
 
-	static Shape* create() { return new Rect; }
+	static Shape* create() { return new Rect; } //객체를 만드는 새로운 방법
 };
-
+// cpp에는 클래스 이름을 자료구조에 저장할 수 없음 >> 대신 생성함수 create()는 보관 가능하다.
 
 
 class Circle : public Shape
@@ -67,6 +67,7 @@ int main()
 	// 공장에 제품을 등록한다.
 	factory.register_shape(1, &Rect::create);
 	factory.register_shape(2, &Circle::create);
+	// 새로운 도형이 생기면 공장에 제품을 등록하고, 찍어내야 한다.
 
 	while (1)
 	{
